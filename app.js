@@ -12,7 +12,8 @@ import MongoStore from "connect-mongo";
 import sessionRouter from "./src/routes/session.js";
 import { Router } from "express";
 import passport from "passport";
-import initializePassport from "./src/config/passport.config.js";
+import {initializePassport, initializePassportGithub} from "./src/config/passport.config.js";
+import viewsRouter from "./src/routes/views.js";
 
 const manager = new ProductManager();
 
@@ -48,10 +49,12 @@ app.use(session({
 }))
 
 initializePassport();
+initializePassportGithub();
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api/session", sessionRouter);
+app.use("/", viewsRouter);
 
 app.get("/hbs", async (req, res) => {
     let productos = await manager.getProducts();
