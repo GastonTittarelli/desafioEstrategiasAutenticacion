@@ -3,7 +3,7 @@ import {authMiddleware} from "../middlewares/auth.js";
 
 const viewsRouter = Router();
 
-viewsRouter.get("/", authMiddleware, (req, res) => {
+viewsRouter.get("/", authMiddleware, async (req, res) => {
     let user = req.session.user;
     res.render("home", {user})
 });

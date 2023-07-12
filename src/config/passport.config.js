@@ -45,6 +45,8 @@ export const initializePassport = () => {
     })
 }
 
+
+
 export const initializePassportGithub = () => {
     passport.use("github", new GithubStrategy({
         clientID: "Iv1.ca2928a6115608d1",
@@ -54,7 +56,6 @@ export const initializePassportGithub = () => {
 
     }, async (accessToken, refreshToken, profile, done) => {
         try{
-            console.log(profile);
             let userEmail = profile.emails[0].value;
             let user = await getByEmail(userEmail);
             if (!user) {
