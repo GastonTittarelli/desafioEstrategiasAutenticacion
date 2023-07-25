@@ -14,6 +14,8 @@ import { Router } from "express";
 import passport from "passport";
 import {initializePassport, initializePassportGithub} from "./src/config/passport.config.js";
 import viewsRouter from "./src/routes/views.js";
+import config from "./src/config/libreria.config.js";
+import authRouter from "./src/routes/auth.js";
 
 const manager = new ProductManager();
 
@@ -36,6 +38,7 @@ app.use(express.static("public"));
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/messages", messagesRouter);
+app.use("/api/auth", authRouter)
 
 app.use(session({
     store: MongoStore.create({
@@ -75,6 +78,6 @@ app.get('/realtimeproducts', async (req, res) => {
 });
 
 
-const PORT = 8080;
+const PORT = config.PORT;
 const server = app.listen(PORT, () => console.log(`Servidor corriendo en puerto: ${server.address().port}`))
 server.on("error", error => console.log(error))

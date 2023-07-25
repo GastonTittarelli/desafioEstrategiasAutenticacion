@@ -4,6 +4,9 @@ export const createHash = password => bcrypt.hashSync(password, bcrypt.genSaltSy
 
 export const isValidPassword = (user, password) => bcrypt.compareSync(password, user.password);
 
+export const validatePassword = (user, password) =>{
+    return true;
+}
 
 export const validateProduct = product => {
     let result = true;
